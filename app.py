@@ -35,8 +35,8 @@ logger.addHandler(stream_handler)
 
 # Load model
 device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-#model = CNNClassifier().to(device)
-#checkpoint = torch.load("cnn_classifier.pth", map_location=device)
+model = CNNClassifier().to(device)
+checkpoint = torch.load("cnn_classifier.pth", map_location=device)
 
 # Fix checkpoint keys
 state_dict = checkpoint.get('model') or checkpoint.get('model_state_dict') or checkpoint.get('state_dict') or checkpoint
@@ -64,20 +64,20 @@ with open("intents.json") as file:
     data = json.load(file)
 
 # Load sentence transformer model
-#nlp_model = SentenceTransformer('all-MiniLM-L6-v2')
+nlp_model = SentenceTransformer('all-MiniLM-L6-v2')
 
 # Precompute all pattern embeddings
-#intent_embeddings = []
-# for intent in data["intents"]:
-#     pattern_embeddings = [
-#         nlp_model.encode(pattern, convert_to_tensor=True)
-#         for pattern in intent["patterns"]
-#     ]
-#     intent_embeddings.append({
-#         "tag": intent["tag"],
-#         "responses": intent["responses"],
-#         "embeddings": pattern_embeddings
-#     })
+intent_embeddings = []
+for intent in data["intents"]:
+    pattern_embeddings = [
+        nlp_model.encode(pattern, convert_to_tensor=True)
+        for pattern in intent["patterns"]
+    ]
+    intent_embeddings.append({
+        "tag": intent["tag"],
+        "responses": intent["responses"],
+        "embeddings": pattern_embeddings
+    })
 
 # Rule-based fallback for vague inputs
 def rule_based_intent(user_input):

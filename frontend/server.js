@@ -11,7 +11,8 @@ app.use(express.urlencoded({ extended: true }));
 app.use(express.json()); // For parsing JSON requests
 
 // Connect to MongoDB
-mongoose.connect("mongodb://127.0.0.1:27017/thyronet");
+//mongoose.connect("mongodb://127.0.0.1:27017/thyronet");
+mongoose.connect("mongodb+srv://venkatrao:venkat123@nextgenprogram.lmupc.mongodb.net/thyronet?retryWrites=true&w=majority&appName=nextgenprogram");
 const db = mongoose.connection;
 db.once("open", () => {
   console.log("Mongoose Connection Successful");

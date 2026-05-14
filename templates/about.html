@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>About - ThyroNet</title>
+
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+/>
+
+  <style>
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body */
+body {
+  font-family: 'Poppins', sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(255,255,255,0.35), transparent 30%),
+    linear-gradient(135deg, #6a11cb 0%, #2575fc 50%, #43cea2 100%);
+  min-height: 100vh;
+  color: #333;
+}
+
+/* Header */
+header {
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(16px);
+  color: white;
+  padding: 24px 40px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* Header Title */
+.header-title i {
+  margin-right: 10px;
+  animation: pulseIcon 2s infinite;
+}
+
+@keyframes pulseIcon {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.15);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+
+/* Navigation Links */
+.nav-links {
+  position: absolute;
+  right: 40px;
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.nav-links a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.1rem;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+.nav-links a:hover {
+  background: rgba(255,255,255,0.15);
+  transform: translateY(-2px);
+}
+
+/* About Section Container */
+.about-container {
+  margin-top: 120px;
+  padding: 25px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* About Content Card */
+.about-content {
+  background: rgba(255,255,255,0.96);
+  backdrop-filter: blur(12px);
+
+  width: 100%;
+  max-width: 950px;
+
+  padding: 40px;
+  border-radius: 24px;
+
+  text-align: justify;
+  line-height: 1.9;
+
+  font-size: 1.05rem;
+  color: #444;
+
+  margin: auto;
+
+  box-shadow:
+    0 18px 40px rgba(0,0,0,0.12),
+    0 6px 14px rgba(255,255,255,0.08);
+
+  animation: fadeIn 0.7s ease;
+}
+
+/* About Heading */
+.about-content h2 {
+  color: #5b2be0;
+  margin-bottom: 20px;
+  text-align: center;
+  font-size: 2rem;
+  position: relative;
+}
+
+.about-content h2::after {
+  content: '';
+  width: 100px;
+  height: 5px;
+  border-radius: 10px;
+  background: linear-gradient(to right, #6a11cb, #2575fc, #43cea2);
+  display: block;
+  margin: 12px auto 0;
+}
+
+/* Paragraph Styling */
+.about-content p {
+  margin-bottom: 18px;
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(15px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+
+  header {
+    padding: 18px 20px;
+  }
+
+  .header-title {
+    font-size: 1.2rem;
+  }
+
+  .nav-links {
+    right: 15px;
+    gap: 10px;
+  }
+
+  .nav-links a {
+    font-size: 0.95rem;
+    padding: 6px 10px;
+  }
+
+  .about-container {
+    margin-top: 100px;
+    padding: 15px;
+  }
+
+  .about-content {
+    padding: 25px;
+    font-size: 0.97rem;
+    line-height: 1.7;
+  }
+
+  .about-content h2 {
+    font-size: 1.6rem;
+  }
+}
+ul li {
+  margin-bottom: 12px;
+  transition: all 0.3s ease;
+}
+
+ul li:hover {
+  transform: translateX(5px);
+  color: #2575fc;
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#6a11cb, #2575fc);
+  border-radius: 10px;
+}
+ul li {
+  transition: 0.3s;
+}
+
+ul li:hover {
+  transform: translateX(5px);
+  color: #2575fc;
+}
+body {
+  animation: fadePage 0.5s ease;
+}
+
+@keyframes fadePage {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+</style>
+</head>
+<body>
+
+  <header>
+    <div class="header-title">
+      <i class="fas fa-stethoscope"></i>
+      ThyroNet: A CNN Based Intelligent Tool For Thyroid Cancer Detection
+    </div>
+
+    <div class="nav-links">
+      <a href="http://127.0.0.1:5000/">
+        <i class="fa fa-home"></i>
+      </a>
+    </div>
+  </header>
+
+  <div class="about-container">
+
+    <div class="about-content">
+
+      <h2>About ThyroNet</h2>
+
+      <p>
+        ThyroNet is an advanced CNN-based tool designed to help everyone from
+        patients to healthcare providers detect thyroid cancer from ultrasound
+        images. It offers fast, accurate, and easy-to-understand predictions.
+      </p>
+
+      <p>
+        You can also ask queries related to thyroid cancer directly through
+        the system for additional support and information.
+      </p>
+
+      <p>
+        Simply upload an ultrasound image on the home page. The system analyzes
+        the image using deep learning models and instantly gives a prediction:
+      </p>
+
+      <ul>
+        <li>
+          <span style="color: green; font-weight: bold;">Green</span>
+          indicates a benign (non-cancerous) result.
+        </li>
+
+        <li>
+          <span style="color: red; font-weight: bold;">Red</span>
+          indicates a malignant (cancerous) result.
+        </li>
+      </ul>
+
+      <p>
+        This clear color coding helps users quickly understand their results
+        and take the next steps confidently.
+      </p>
+
+      <!-- NEW SECTION -->
+
+      <h2>Features</h2>
+
+      <ul>
+        <li>AI-powered thyroid cancer prediction</li>
+        <li>Ultrasound image analysis</li>
+        <li>Fast and accurate classification</li>
+        <li>Interactive chatbot support</li>
+        <li>User-friendly interface</li>
+      </ul>
+
+      <!-- NEW SECTION -->
+
+      <h2>Technology Used</h2>
+
+      <p>
+        ThyroNet is developed using Convolutional Neural Networks (CNN),
+        Flask, HTML, CSS, JavaScript, and Python technologies.
+      </p>
+
+      <!-- TEAM SECTION -->
+
+      <h2>Project Team</h2>
+
+      <p><strong>Project Lead:</strong> Shilpa Neralla</p>
+
+      <p>
+        <strong>Team Members:</strong>
+        Venkatrao Velagapudi,
+        Lokesh Taduri,
+        Umesh Reddy Bangla
+      </p>
+
+      <p><strong>Contact:</strong> +91 7981487894</p>
+
+    </div>
+
+  </div>
+
+</body>
+</html>

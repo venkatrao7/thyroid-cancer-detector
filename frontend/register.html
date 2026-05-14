@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Thyronet - Register</title>
+<link rel="stylesheet" href="register.css">
+</head>
+<body>
+  <div class="register-container">
+    <h1>Register</h1>
+    <form action="/register" method="POST" onsubmit="return validateForm()">
+      <div class="form-group">
+        <label for="name">Full Name:</label>
+        <input type="text" id="name" name="name" placeholder="Enter your full name" required>
+      </div>
+      <div class="form-group">
+        <label for="email">Email:</label>
+        <input type="email" id="email" name="email" placeholder="Enter your email" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Password:</label>
+        <div style="position: relative;">
+          <input type="password" id="password" name="password" placeholder="Enter your password" required>
+          <span id="togglePassword" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+            👁️
+          </span>
+        </div>
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirm Password:</label>
+        <div style="position: relative;">
+          <input type="password" id="confirmPassword" name="confirmPassword" placeholder="Confirm your password" required>
+          <span id="toggleConfirmPassword" style="position: absolute; right: 10px; top: 50%; transform: translateY(-50%); cursor: pointer;">
+            👁️
+          </span>
+        </div>
+      </div>
+      <button class="btn-register" type="button" onclick="handleRegister()">
+  Register
+</button>
+    </form>
+    <a href="form.html" class="login-link">Already have an account? Login here</a>
+  </div>
+
+  <script>
+    function validateForm() {
+      const password = document.getElementById('password').value;
+      const confirmPassword = document.getElementById('confirmPassword').value;
+
+      if (password !== confirmPassword) {
+        alert('Passwords do not match!');
+        return false;
+      }
+      return true;
+    }
+
+    // Toggle visibility for password
+    const togglePassword = document.getElementById('togglePassword');
+    const passwordField = document.getElementById('password');
+
+    togglePassword.addEventListener('click', () => {
+      const type = passwordField.type === 'password' ? 'text' : 'password';
+      passwordField.type = type;
+
+      // Change the eye symbol
+      togglePassword.textContent = type === 'password' ? '👁' : '🙈';
+    });
+
+    // Toggle visibility for confirm password
+    const toggleConfirmPassword = document.getElementById('toggleConfirmPassword');
+    const confirmPasswordField = document.getElementById('confirmPassword');
+
+    toggleConfirmPassword.addEventListener('click', () => {
+      const type = confirmPasswordField.type === 'password' ? 'text' : 'password';
+      confirmPasswordField.type = type;
+
+      // Change the eye symbol
+      toggleConfirmPassword.textContent = type === 'password' ? '👁' : '🙈';
+    });
+
+    async function handleRegister() {
+
+  if (!validateForm()) {
+    return;
+  }
+
+const name = document.getElementById('name').value;
+const email = document.getElementById('email').value;
+const password = document.getElementById('password').value;
+
+  try {
+
+    const response = await fetch('/register', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name,
+        email,
+        password
+
+      })
+    });
+
+   const text = await response.text();
+
+document.open();
+document.write(text);
+document.close();
+
+  } catch (error) {
+    console.error(error);
+    alert("Registration failed");
+  }
+}
+  </script>
+</body>
+</html>

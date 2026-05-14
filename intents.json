@@ -1,0 +1,291 @@
+{
+  "intents": [
+     {
+      "tag": "greeting",
+      "patterns": [
+        "hello",
+        "hi",
+        "hey",
+        "good morning",
+        "good evening",
+        "good afrernoon",
+        "greetings", "hii"
+      ],
+      "responses": [
+        "Hello! I'm here to assist you with thyroid-related information.",
+        "Hi there! Ask me anything about thyroid health.",
+        "Hey! How can I help you today?"
+      ]
+    },
+{
+  "tag": "definition_thyroid_cancer",
+  "patterns": [
+    "define ",
+    "explain",
+    "what is thyroid cancer",
+  "define thyroid cancer",
+  "explain thyroid cancer",
+  "meaning of thyroid cancer",
+  "thyroid cancer definition",
+  "thyroid cancer"
+  ],
+  "responses": [
+    "Thyroid cancer is a disease where abnormal cells grow in the thyroid gland, located in the neck. It can disrupt hormone production and needs timely diagnosis."
+  ]
+},
+
+{
+  "tag": "symptoms",
+  "patterns": [
+    "symptoms",
+    "signs of thyroid cancer",
+    "warning signs",
+    "early symptoms of thyroid cancer",
+    "thyroid start"
+  ],
+  "responses": [
+    "Common symptoms include a lump in the neck, hoarseness, difficulty swallowing, and swollen lymph nodes."
+  ]
+},
+{
+  "tag": "early_detection",
+  "patterns": [
+    
+    "detect ",
+    "early detection "
+  ],
+  "responses": [
+    "Early detection involves observing symptoms like neck lumps or voice changes and confirming with blood tests, ultrasound, and biopsy."
+  ]
+},
+{
+  "tag": "diet_thyroid_cancer",
+  "patterns": [
+    "diet for thyroid cancer",
+    "food for thyroid cancer patients",
+    "nutrition during thyroid cancer",
+    "what to eat if I have thyroid cancer"
+  ],
+  "responses": [
+    "Thyroid cancer patients are advised to eat a balanced diet rich in fruits, vegetables, whole grains, and lean proteins. Limiting processed foods and consulting a dietitian can help tailor your diet."
+  ]
+},
+{
+      "tag": "treatment_options",
+      "patterns": [
+        "available treatments",
+        "treatment choices",
+        "cure options",
+        "recommended therapy",
+        "healing process"
+      ],
+      "responses": [
+        "Treatment options include surgery, radioactive iodine therapy, hormone therapy, radiation, and sometimes chemotherapy. The choice depends on the type and stage of the condition."
+      ]
+    },
+    {
+      "tag": "risk_factors",
+      "patterns": [
+        "risk factors",
+        "chances of getting it",
+        "causes behind it",
+        "reasons people get it",
+        "common triggers"
+      ],
+      "responses": [
+        "Risk factors include family history, radiation exposure, certain genetic conditions, and being female. Early awareness is key."
+      ]
+    },
+    {
+  "tag": "types_thyroid_cancer",
+  "patterns": [
+    "types of thyroid cancer",
+    "different kinds of thyroid cancer",
+    "kinds of thyroid cancer"
+  ],
+  "responses": [
+    "The main types are papillary, follicular, medullary, and anaplastic thyroid cancer. Papillary is the most common and usually grows slowly."
+    ]
+},
+    {
+      "tag": "prevention",
+      "patterns": [
+        "preventive steps",
+        "avoid getting it",
+        "stay safe from it",
+        "prevent it naturally",
+        "reduce the risk"
+      ],
+      "responses": [
+        "While not always preventable, minimizing radiation exposure and maintaining regular health checkups can help reduce the risk."
+      ]
+    },
+    {
+      "tag": "doctor_visit",
+      "patterns": [
+        "see a doctor",
+        "need medical help",
+        "book an appointment",
+        "consult specialist",
+        "talk to physician"
+      ],
+      "responses": [
+        "If you notice persistent symptoms or changes in your neck area, it’s best to consult an endocrinologist or oncologist for evaluation."
+      ]
+    },
+    {
+      "tag": "support_groups",
+      "patterns": [
+        "join community",
+        "get emotional help",
+        "talk to survivors",
+        "meet patients",
+        "find support"
+      ],
+      "responses": [
+        "There are many support groups online and offline where patients and families share experiences, advice, and emotional support."
+      ]
+    },
+    {
+      "tag": "complications",
+      "patterns": [
+        "what are the complications",
+        "does thyroid cancer spread",
+        "can it affect other organs",
+        "advanced stages problems"
+      ],
+      "responses": [
+        "Thyroid cancer can spread to lymph nodes, lungs, or bones in advanced stages. Regular check-ups and early treatment help avoid complications."
+      ]
+    },
+    {
+      "tag": "recovery_time",
+      "patterns": [
+        "how long is the recovery",
+        "thyroid cancer recovery time",
+        "when will I be normal again",
+        "healing time for thyroid cancer"
+      ],
+      "responses": [
+        "Recovery time varies, but most patients recover within a few weeks after surgery. Radioactive iodine therapy might require additional time."
+      ]
+    },
+    {
+      "tag": "follow_up",
+      "patterns": [
+        "do I need follow-up",
+        "how often should I visit doctor",
+        "post treatment visits",
+        "after treatment follow up"
+      ],
+      "responses": [
+        "Yes, regular follow-ups are crucial to monitor for recurrence. Most doctors recommend checkups every 6–12 months."
+      ]
+    },
+    {
+      "tag": "mental_health_support",
+      "patterns": [
+        "i feel anxious",
+        "i am scared",
+        "mental health",
+        "stress about thyroid cancer",
+        "how to stay positive"
+      ],
+      "responses": [
+        "It's normal to feel anxious. Talking to counselors or joining support groups can help you stay mentally strong."
+      ]
+    },
+    {
+      "tag": "physical_activity",
+      "patterns": [
+        "can I exercise",
+        "physical activity during treatment",
+        "workout after thyroid cancer",
+        "is gym allowed"
+      ],
+      "responses": [
+        "Light exercise is usually fine after surgery, but always consult your doctor. Avoid heavy lifting initially."
+      ]
+    },
+    {
+      "tag": "medication_lifetime",
+      "patterns": [
+        "do I need medicine forever",
+        "will I be on thyroid pills always",
+        "lifetime medication",
+        "long term treatment"
+      ],
+      "responses": [
+        "Many patients need thyroid hormone replacement therapy for life after surgery. It helps maintain normal metabolism."
+      ]
+    },
+     {
+      "tag": "general_diet_tips",
+      "patterns": [
+        "healthy food",
+        "nutrition advice",
+        "daily diet tips",
+        "foods for strong immunity"
+      ],
+      "responses": [
+        "Eat a balanced diet with leafy greens, whole grains, fruits, and lean proteins. Hydrate well and avoid excessive sugar and junk food."
+      ]
+    },
+     {
+      "tag": "sleep_tips",
+      "patterns": [
+        "how to sleep better",
+        "sleep advice",
+        "i can't sleep",
+        "insomnia help"
+      ],
+      "responses": [
+        "Try sticking to a consistent sleep schedule, limit screen time before bed, and avoid caffeine late in the day."
+      ]
+    },
+    {
+      "tag": "hydration",
+      "patterns": [
+        "how much water should I drink",
+        "daily water intake",
+        "hydration tips",
+        "importance of drinking water"
+      ],
+      "responses": [
+        "It’s recommended to drink at least 8 glasses of water daily. Staying hydrated helps with digestion, skin health, and energy."
+      ]
+    },
+     {
+      "tag": "immunity_boost",
+      "patterns": [
+        "how to boost immunity",
+        "strong immune system tips",
+        "immunity hacks",
+        "how to stay healthy"
+      ],
+      "responses": [
+        "You can boost your immunity by eating fruits, vegetables, staying active, sleeping well, and avoiding stress."
+      ]
+    },
+
+    {
+      "tag": "goodbye",
+      "patterns": [
+        "bye",
+        "goodbye",
+        "see you",
+        "take care",
+        "catch you later",
+        "exit"
+      ],
+      "responses": [
+        "Goodbye! Stay healthy and take care!",
+        "See you soon. Feel free to come back if you have more questions!",
+        "Take care! Wishing you good health."
+      ]
+    }
+ 
+
+  ]
+
+}

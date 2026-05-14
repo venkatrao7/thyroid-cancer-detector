@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thyronet - Login</title>
+<link rel="stylesheet" href="form1.css">
+</head>
+<body>
+  <div class="login-wrapper">
+    <!-- Login container -->
+    <div class="login-container">
+      <h1>LOGIN</h1>
+
+      <form id="loginForm" onsubmit="return false;">
+        <div class="form-group">
+          <label for="email">Email:</label>
+          <input
+            type="email"
+            id="email"
+            name="email"
+            placeholder="Enter your email"
+            required
+          />
+        </div>
+        <div class="form-group">
+          <label for="password">Password:</label>
+          <div class="password-wrapper">
+            <input
+              type="password"
+              id="password"
+              name="password"
+              placeholder="Enter your password"
+              required
+            />
+            <span id="togglePassword" class="toggle-password">👁️</span>
+          </div>
+        </div>
+        <div class="btn-container">
+          <button type="submit" class="btn btn-login" onclick="handlelogin()">
+            Login
+          </button>
+          <button
+            type="button"
+            class="btn btn-register"
+            onclick="redirectToRegister()"
+          >
+            Create Account
+          </button>
+        </div>
+      </form>
+    </div>
+
+    <!-- Image section -->
+    <div class="image-container">
+<img src="photo/caduceus.jpg">
+    </div>
+  </div>
+
+  <script>
+    function redirectToRegister() {
+      window.location.href = "/register";
+    }
+
+    async function handlelogin() {
+      const email = document.getElementById("email").value;
+      const password = document.getElementById("password").value;
+
+      try {
+        const response = await fetch("/login", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({ email, password }),
+        });
+
+        const data = await response.json();
+
+        if (data.success) {
+          alert("Login successful!");
+          window.location.href = data.redirect || "http://127.0.0.1:5000";
+        } else {
+          alert(data.message || "Login failed. Please try again.");
+        }
+      } catch (err) {
+        console.error("Error during login:", err);
+        alert("An error occurred while logging in. Please try again later.");
+      }
+    }
+
+    // Toggle password visibility
+    const togglePassword = document.getElementById("togglePassword");
+    const passwordField = document.getElementById("password");
+
+    togglePassword.addEventListener("click", () => {
+      const type = passwordField.type === "password" ? "text" : "password";
+      passwordField.type = type;
+      togglePassword.textContent = type === "password" ? "👁️" : "🙈";
+    });
+  </script>
+</body>
+</html>

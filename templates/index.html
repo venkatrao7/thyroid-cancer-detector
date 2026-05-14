@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>ThyroNet</title>
+  <link
+  rel="stylesheet"
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+/>
+
+<style>
+
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* Body */
+html, body {
+  height: 100%;
+  font-family: 'Poppins', sans-serif;
+  background:
+    radial-gradient(circle at top left, rgba(255,255,255,0.35), transparent 30%),
+    linear-gradient(135deg, #6a11cb 0%, #2575fc 50%, #43cea2 100%);
+  overflow: hidden;
+}
+
+/* Header */
+header {
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(16px);
+  color: white;
+  padding: 24px;
+  width: 100%;
+  position: fixed;
+  top: 0;
+  left: 0;
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  letter-spacing: 1px;
+  z-index: 1000;
+  border-bottom: 1px solid rgba(255,255,255,0.15);
+  box-shadow: 0 8px 18px rgba(0,0,0,0.08);
+}
+
+/* Logout Link */
+header a {
+  color: white;
+  position: absolute;
+  right: 24px;
+  top: 28px;
+  text-decoration: none;
+  font-size: 1rem;
+  font-weight: 600;
+  padding: 8px 14px;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+}
+
+header a:hover {
+  background: rgba(255,255,255,0.15);
+  transform: translateY(-2px);
+}
+
+/* Chat Container */
+.chat-container {
+  position: absolute;
+  top: 85px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 18px;
+}
+
+/* Chat Box */
+.chat-box {
+  flex: 1;
+  overflow-y: auto;
+  padding: 20px;
+  background: rgba(255,255,255,0.94);
+  backdrop-filter: blur(12px);
+  border-radius: 22px;
+  box-shadow:
+    0 15px 35px rgba(0,0,0,0.12),
+    0 5px 15px rgba(255,255,255,0.08);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  scroll-behavior: smooth;
+}
+
+/* Custom Scrollbar */
+.chat-box::-webkit-scrollbar {
+  width: 8px;
+}
+
+.chat-box::-webkit-scrollbar-thumb {
+  background: linear-gradient(#6a11cb, #2575fc);
+  border-radius: 10px;
+}
+
+/* Chat Messages */
+.chat-message {
+  padding: 14px 18px;
+  border-radius: 18px;
+  max-width: 80%;
+  word-wrap: break-word;
+  font-size: 0.98rem;
+  line-height: 1.5;
+  animation: fadeIn 0.3s ease;
+  box-shadow: 0 5px 12px rgba(0,0,0,0.06);
+}
+
+/* Bot Message */
+.bot-message {
+  background: linear-gradient(135deg, #eef4ff, #dbe9ff);
+  color: #333;
+  align-self: flex-start;
+  border-bottom-left-radius: 6px;
+}
+
+/* User Message */
+.user-message {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  color: white;
+  align-self: flex-end;
+  border-bottom-right-radius: 6px;
+}
+
+/* Input Section */
+.chat-input-wrapper {
+  display: flex;
+  gap: 12px;
+  align-items: center;
+  margin-top: 15px;
+  padding: 14px;
+  background: rgba(255,255,255,0.95);
+  border-radius: 18px;
+  backdrop-filter: blur(10px);
+  box-shadow:
+    0 8px 20px rgba(0,0,0,0.08);
+}
+
+/* Input Box */
+.chat-input {
+  flex: 1;
+  padding: 14px 16px;
+  border-radius: 14px;
+  border: 2px solid transparent;
+  background: #f4f7ff;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+  color: #333;
+}
+
+.chat-input::placeholder {
+  color: #8d98b3;
+}
+
+.chat-input:focus {
+  outline: none;
+  background: white;
+  border-color: #6a11cb;
+  box-shadow:
+    0 0 0 5px rgba(106,17,203,0.12),
+    0 8px 16px rgba(37,117,252,0.12);
+}
+
+/* Buttons */
+.chat-button,
+.upload-button {
+  background: linear-gradient(135deg, #6a11cb, #2575fc);
+  border: none;
+  color: white;
+  padding: 13px 18px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: 600;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 18px rgba(37,117,252,0.2);
+}
+
+.chat-button:hover:not(:disabled),
+.upload-button:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #7b2ff7, #2575fc, #43cea2);
+}
+
+.chat-button:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Upload Icon */
+.upload-label {
+  cursor: pointer;
+  font-size: 1.6rem;
+  line-height: 1;
+  user-select: none;
+  transition: transform 0.3s ease;
+}
+
+.upload-label:hover {
+  transform: scale(1.08);
+}
+
+#image-upload {
+  display: none;
+}
+
+/* Image Preview */
+img.preview {
+  max-width: 220px;
+  max-height: 220px;
+  border-radius: 18px;
+  align-self: flex-end;
+  box-shadow: 0 10px 22px rgba(0,0,0,0.15);
+  animation: fadeIn 0.4s ease;
+}
+
+/* Result Card */
+.result-card {
+  padding: 18px;
+  border-radius: 18px;
+  color: white;
+  margin-top: 10px;
+  font-size: 1rem;
+  font-weight: 600;
+  max-width: 320px;
+  align-self: flex-start;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+  animation: fadeIn 0.4s ease;
+}
+
+/* Benign Result */
+.result-benign {
+  background: linear-gradient(135deg, #00b09b, #96c93d);
+}
+
+/* Malignant Result */
+.result-malignant {
+  background: linear-gradient(135deg, #ff416c, #ff4b2b);
+}
+
+/* Confidence Bar */
+.confidence-bar {
+  height: 12px;
+  margin-top: 12px;
+  background-color: rgba(255,255,255,0.2);
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.result-benign .confidence-fill,
+.result-malignant .confidence-fill {
+  height: 100%;
+  border-radius: 10px;
+  transition: width 0.6s ease-in-out;
+}
+
+.result-benign .confidence-fill {
+  background: rgba(255,255,255,0.85);
+}
+
+.result-malignant .confidence-fill {
+  background: rgba(255,255,255,0.85);
+}
+.logout-btn {
+  margin-left: 18px;
+  padding: 8px 18px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+
+  /* Colorful Gradient */
+  background: linear-gradient(135deg, #ff6a00, #ee0979);
+
+  color: white;
+  font-size: 0.95rem;
+  font-weight: 600;
+
+  /* Smooth Effects */
+  transition: all 0.3s ease;
+
+  /* Modern Shadow */
+  box-shadow: 0 6px 14px rgba(238, 9, 121, 0.25);
+}
+
+/* Hover Effect */
+.logout-btn:hover {
+  transform: translateY(-2px);
+  background: linear-gradient(135deg, #ff7b00, #ff1493);
+  box-shadow: 0 10px 20px rgba(238, 9, 121, 0.35);
+}
+
+/* Click Effect */
+.logout-btn:active {
+  transform: scale(0.97);
+}
+
+/* Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Responsive */
+@media screen and (max-width: 600px) {
+
+  header {
+    font-size: 1.1rem;
+    padding: 18px;
+  }
+
+  header a {
+    top: 18px;
+    right: 15px;
+    font-size: 0.9rem;
+  }
+
+  .chat-container {
+    padding: 12px;
+    top: 72px;
+  }
+
+  .chat-input-wrapper {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .chat-button,
+  .upload-button {
+    width: 100%;
+  }
+
+  .chat-message {
+    max-width: 92%;
+  }
+}
+.header-title i {
+  margin-right: 10px;
+  color: white;
+  transition: 0.3s ease;
+}
+
+.header-title i:hover {
+  transform: scale(1.1);
+}
+::-webkit-scrollbar {
+  width: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: linear-gradient(#6a11cb, #2575fc);
+  border-radius: 10px;
+}
+
+</style>
+</head>
+<body>
+
+  <header>
+    <i class="fas fa-stethoscope"></i>
+
+    ThyroNet: A CNN Based Intelligent Tool For Thyroid Cancer Detection
+    <a href="about.html"><i class="fa fa-info-circle"></i></a>
+    <button onclick="logout()" class="logout-btn">Logout</button>
+
+    
+      
+  </header>
+
+  <div class="chat-container" role="main">
+    <div class="chat-box" id="chatbox" aria-live="polite">
+      <div id="loading" style="display:none;" class="bot-message">
+  Analyzing thyroid scan...
+</div>
+      <div class="chat-message bot-message">Hello! Upload an image or ask me anything about thyroid cancer.</div>
+    </div>
+    <div class="chat-input-wrapper">
+      <label class="upload-label" for="image-upload" title="Upload Image" aria-label="Upload Image">+</label>
+      <input type="file" id="image-upload" accept="image/*" />
+      <input type="text" id="user-input" class="chat-input" placeholder="Type your question..." autocomplete="off" aria-label="User input" />
+      <button class="chat-button" id="send-btn" disabled aria-label="Send Message">Send</button>
+    </div>
+  </div>
+
+  <script>
+    const input = document.getElementById("user-input");
+    const sendBtn = document.getElementById("send-btn");
+    const chatbox = document.getElementById("chatbox");
+    const imageUpload = document.getElementById("image-upload");
+
+    input.addEventListener("input", () => {
+      sendBtn.disabled = !input.value.trim();
+    });
+
+    sendBtn.addEventListener("click", sendMessage);
+
+    input.addEventListener("keydown", (e) => {
+      if (e.key === "Enter" && input.value.trim()) {
+        sendMessage();
+      }
+    });
+
+    function sendMessage() {
+      const message = input.value.trim();
+      if (!message) return;
+
+      addMessage(message, 'user');
+      sendBtn.disabled = true;
+
+      fetch("/chatbot", {
+        method: "POST",
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ message })
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.reply) {
+          addMessage(data.reply, 'bot');
+        } else {
+          addMessage("Sorry, I didn't get that. Please try again.", 'bot');
+        }
+      })
+      .catch(() => addMessage("Error connecting to server.", "bot"))
+      .finally(() => {
+        input.value = "";
+        sendBtn.disabled = true;
+        input.focus();
+      });
+    }
+
+    function addMessage(text, type) {
+      const msg = document.createElement("div");
+      msg.className = `chat-message ${type}-message`;
+      msg.textContent = text;
+      chatbox.appendChild(msg);
+      chatbox.scrollTop = chatbox.scrollHeight;
+    }
+
+    imageUpload.addEventListener("change", () => {
+      const file = imageUpload.files[0];
+      if (!file) return;
+
+      const reader = new FileReader();
+      reader.onload = function (e) {
+        const img = document.createElement("img");
+        img.src = e.target.result;
+        img.className = "preview user-message";
+        chatbox.appendChild(img);
+        chatbox.scrollTop = chatbox.scrollHeight;
+      };
+      reader.readAsDataURL(file);
+
+      const formData = new FormData();
+      formData.append("file", file);
+      document.getElementById("loading").style.display = "block";
+      fetch("/predict", {
+        method: "POST",
+        body: formData
+      })
+      .then(res => res.json())
+      .then(data => {
+        if (data.error) {
+          addMessage("Error: " + data.error, "bot");
+        } else if (data.prediction && data.accuracy !== undefined) {
+          displayResultCard(data.prediction, data.accuracy);
+        } else {
+          addMessage("Unexpected response from server.", "bot");
+        }
+      })
+      .catch(() => addMessage("Error uploading image.", "bot"))
+      .finally(() => {
+  imageUpload.value = "";
+  document.getElementById("loading").style.display = "none";
+});
+    });
+
+    function displayResultCard(prediction, accuracy) {
+  const resultDiv = document.createElement("div");
+
+  resultDiv.className = "result-card " +
+    (prediction.toLowerCase() === "benign"
+      ? "result-benign"
+      : "result-malignant");
+
+  resultDiv.innerHTML = `
+    <h3>${prediction}</h3>
+    <p>Confidence: ${accuracy}%</p>
+    <p>${prediction === "Benign" ? "Low Risk" : "High Risk"}</p>
+
+    <div class="confidence-bar">
+      <div class="confidence-fill" style="width: ${accuracy}%;"></div>
+    </div>
+  `;
+
+  chatbox.appendChild(resultDiv);
+  chatbox.scrollTop = chatbox.scrollHeight;
+}
+function logout() {
+  window.location.href = "http://127.0.0.1:3018/login";
+}
+  </script>
+
+</body>
+</html>
